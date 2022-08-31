@@ -3,6 +3,7 @@ import Invoice from './models/invoice.js';
 import mongoose from 'mongoose';
 import logit from './middlewares/logit.js';
 import invoicesRouter from './routes/invoices.js';
+import cors from 'cors';
 
 
 const app = express(); // application of express
@@ -10,6 +11,7 @@ const port = 8081;
 const dbUrl = 'mongodb://localhost:27017/test_invoice';
 
 app.use(express.json());
+app.use(cors());
 app.use(logit);
 app.use(invoicesRouter);
 

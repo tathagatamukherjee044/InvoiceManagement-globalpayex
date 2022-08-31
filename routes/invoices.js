@@ -13,7 +13,12 @@ invoicesRouter.get("/details" , async (req,res) => {
     //     //resultsPending : resultsPending.$group.totalOwed
     // }
     //const ress= resultsTotal[0];
-    res.send(`total Owed ${resultsTotal[0].totalOwed}`);
+    const response = {
+        totalSales: resultsTotal[0].totalOwed,
+        totalPending: resultsPending[0].totalOwed,
+        totalPaid: resultsPaid[0].totalOwed,
+    }
+    res.send(response);
     // res.send can not send number values // res.send(ress.totalOwed) throws an error
 }, (error) => {
     console.log(error)

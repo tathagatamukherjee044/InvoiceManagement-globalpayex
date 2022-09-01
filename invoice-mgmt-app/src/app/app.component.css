@@ -1,6 +1,11 @@
 .app-container {
     text-align: center;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: "Montserrat", sans-serif;
+    background-color: rgb(180, 220, 255);
+    height: 1080px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .app-container>.nav-menu {
@@ -15,4 +20,11 @@
     color: rgb(0, 0, 0);
     font-size: large;
 
+}
+
+.heading {
+    color: rgb(9, 104, 187);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(24, 132, 175, 0.705);
+    background-color: rgb(202, 226, 247);
 }

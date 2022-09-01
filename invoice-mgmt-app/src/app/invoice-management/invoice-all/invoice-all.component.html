@@ -1,0 +1,30 @@
+<div class="invoices-container">
+    <table *ngIf="invoices.length">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Retailer</td>
+                <td>Due Date</td>
+                <td>Amount</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let invoice of invoices">
+                <td>
+                    {{invoice._id}}
+                </td>
+                <td>
+                    {{invoice.retailer}}
+                </td>
+                <td>
+                    {{invoice.dueDate}}
+                </td>
+                <td>
+                    {{invoice.amount}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+

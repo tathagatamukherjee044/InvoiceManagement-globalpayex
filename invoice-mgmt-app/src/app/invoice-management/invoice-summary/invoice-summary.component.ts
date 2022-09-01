@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { InvoiceService } from '../invoice.service';
 
 @Component({
   selector: 'app-invoice-summary',
@@ -9,14 +10,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InvoiceSummaryComponent implements OnInit {
 
-  constructor(private http : HttpClient) { }
+  constructor(private invoiceService: InvoiceService) { }
 
   details : any;
 
   ngOnInit(): void {
-    this.http.get<any>('http://localhost:8081/details').subscribe(details => {
-      this.details=details;
-    })
+      this.invoiceService.fetchSummary().subscribe(details => {
+        this.details=details;
+      })
+    }
 
   }
 
@@ -24,7 +26,7 @@ export class InvoiceSummaryComponent implements OnInit {
   //   return this.http.get<any>('http://localhost:8081/details');
   // }
   
- }
+ 
 
 
 

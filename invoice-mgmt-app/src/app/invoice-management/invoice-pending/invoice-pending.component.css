@@ -1,0 +1,25 @@
+.invoices-container>table {
+    margin: auto;
+    margin-top: 10px;
+    border: 1px solid black;
+
+}
+
+tr,td {
+    border: 1px solid black;
+}
+
+.invoices-container>.row{
+    height: 50px;
+  width: 1000px;
+  margin: auto;
+}
+
+.invoices-container>.row>.row1{
+    float: left;
+}
+
+.invoices-container>.row>.row2{
+    float: right;
+}
+

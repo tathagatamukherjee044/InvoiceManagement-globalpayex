@@ -1,0 +1,26 @@
+<div class="invoices-container">
+    
+    <table *ngIf="invoices.length">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Amount</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let invoice of invoices">
+                <td>
+                    {{invoice._id}}
+                </td>
+                <td>
+                    {{invoice.amount}}
+                </td>
+                <td>
+                    <a routerLink="/invoice/{{invoice._id}}">More Details</a>
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+

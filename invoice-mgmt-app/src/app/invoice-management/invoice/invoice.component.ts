@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ErrorService } from 'src/app/error.service';
 import { InvoiceService } from '../invoice.service';
 import { Invoice } from '../types/invoice';
 
@@ -10,7 +11,7 @@ import { Invoice } from '../types/invoice';
 })
 export class InvoiceComponent implements OnInit {
 
-  constructor(private invoiceService : InvoiceService, private route : ActivatedRoute) { }
+  constructor(private invoiceService : InvoiceService, private route : ActivatedRoute, public error: ErrorService) { }
 
   invoice : Invoice | null = null;
 

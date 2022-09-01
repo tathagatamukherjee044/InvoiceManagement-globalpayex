@@ -1,5 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, throwError, Observable } from 'rxjs';
+import { ErrorService } from '../error.service';
+import { Invoice } from './types/invoice';
 
 const url ='http://localhost:8081/invoices'
 
@@ -8,29 +11,38 @@ const url ='http://localhost:8081/invoices'
 })
 export class InvoiceService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,public error : ErrorService) { }
+
+  private handleError(err: HttpErrorResponse) {
+
+    //console.log(err.status);
+    //alert('something went wrong');
+    this.error.showError()
+    return throwError(() => new Error(err.message));
+
+  }
 
   fetchSummary() {
-    return this.http.get<any>(`${url}/summary`);
+    return this.http.get<any>(`${url}/summary`).pipe(catchError((err) => this.handleError(err)));
   }
 
-  fetchPending() {
-    return this.http.get<any>(`${url}/unpaid`)
+  fetchPending(): Observable<Invoice[]> {
+    return this.http.get<Invoice[]>(`${url}/unpaid`).pipe(catchError((err) => this.handleError(err)))
   }
 
-  fetchAll() {
-    return this.http.get<any>(`${url}`)
+  fetchAll() : Observable<Invoice[]>{
+    return this.http.get<Invoice[]>(`${url}`).pipe(catchError((err) => this.handleError(err)));
   }
 
-  fetchPaid() {
-    return this.http.get<any>(`${url}/paid`)
+  fetchPaid() : Observable<Invoice[]> {
+    return this.http.get<Invoice[]>(`${url}/paid`).pipe(catchError((err) => this.handleError(err)));
   }
 
-  fetchInvoice(invoiceId : string) {
-    return this.http.get<any>(`${url}/${invoiceId}`)
+  fetchInvoice(invoiceId : string) : Observable<Invoice>{
+    return this.http.get<Invoice>(`${url}/${invoiceId}`).pipe(catchError((err) => this.handleError(err)));
   }
 
-  fetchPendingRetailer(retailer : string) {
-    return this.http.get<any>(`${url}/unpaid/${retailer}`)
+  fetchPendingRetailer(retailer : string) : Observable<Invoice[]>{
+    return this.http.get<Invoice[]>(`${url}/unpaid/${retailer}`).pipe(catchError((err) => this.handleError(err)));
   }
 }

@@ -6,3 +6,13 @@
 .app-container>.nav-menu {
     margin: 20px;
 }
+
+.error {
+    margin: auto;
+    background-color: rgb(240, 236, 9);
+    width: 500px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-size: large;
+
+}

@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
-<body>
+
+  <div *ngIf="errorService.errorMessage" class="error">{{errorService.errorMessage}}</div>
   <div class="app-container">
     <h1>Welcome to Invoice management app</h1>
     <p>the In-Voices in my head dont shut up O.O </p>
@@ -12,7 +8,6 @@
    </div>
   </div>
  <router-outlet></router-outlet>
-</body>
-</html>
+
 
 

@@ -1,4 +1,6 @@
 <div class="invoices-container">
+    <div class="row">
+        <div class="row1">
     <table *ngIf="invoices.length">
         <thead>
             <tr>
@@ -17,7 +19,7 @@
                     {{invoice.retailer}}
                 </td>
                 <td>
-                    {{invoice.dueDate}}
+                    {{invoice.dueDate | date}}
                 </td>
                 <td>
                     {{invoice.amount}}
@@ -28,7 +30,11 @@
             </tr>
         </tbody>
     </table>
+</div>
+    <div class="row2">
     <router-outlet></router-outlet>
+</div>
+</div>
 </div>
 
 

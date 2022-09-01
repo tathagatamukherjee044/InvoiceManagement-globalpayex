@@ -45,4 +45,18 @@ export class InvoiceService {
   fetchPendingRetailer(retailer : string) : Observable<Invoice[]>{
     return this.http.get<Invoice[]>(`${url}/unpaid/${retailer}`).pipe(catchError((err) => this.handleError(err)));
   }
-}
+
+  postNewInvoice(retailer:string, amount: number, paid : boolean, dueDate: Date) : Observable<Invoice> {
+    return this.http.post<Invoice>(url, {
+      retailer,
+      amount,
+      paid,
+      dueDate
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError((err) => this.handleError(err)));
+  }
+  }
+

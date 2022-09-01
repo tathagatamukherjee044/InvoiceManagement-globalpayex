@@ -1,4 +1,4 @@
-import { getAllInvoices, getInvoiceById, getInvoiceSummary, getUnpaidInvoices, getPaidInvoices, getInvoicesByRetailer } from "../services/invoice.js";
+import { getAllInvoices, getInvoiceById, getInvoiceSummary, getUnpaidInvoices, getPaidInvoices, getInvoicesByRetailer, postNewInvoice } from "../services/invoice.js";
 
 export async function handleGetBookById (req,res) {
     // console.log(req.url);
@@ -33,4 +33,16 @@ export async function handleGetInvoicesByRetailer(req,res) {
     const retailer = req.params.retailer;
     const invoices = await getInvoicesByRetailer(retailer);
     res.send(invoices);
+}
+
+export async function handlePostNewInvoice(req,res) {
+    const data = req.body;
+
+    try {
+        const invoice = await postNewInvoice(data);
+        console.log(invoice);
+        res.sendStatus(200);
+        } catch (err) {
+            next(err)
+        }
 }

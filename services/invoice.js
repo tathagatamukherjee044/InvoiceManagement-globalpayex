@@ -62,3 +62,10 @@ export async function getInvoicesByRetailer(retail) {
     
     return invoices;
 }
+
+export async function postNewInvoice(data) {
+    console.log('called from services');
+    let invoice = new Invoice(data);
+    invoice.save();
+    return invoice
+}

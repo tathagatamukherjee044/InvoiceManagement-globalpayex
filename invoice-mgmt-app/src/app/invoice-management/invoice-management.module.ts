@@ -9,6 +9,8 @@ import { InvoiceAllComponent } from './invoice-all/invoice-all.component';
 import { InvoicePaidComponent } from './invoice-paid/invoice-paid.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoicePendingReatilerComponent } from './invoice-pending-reatiler/invoice-pending-reatiler.component';
+import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,12 +20,15 @@ import { InvoicePendingReatilerComponent } from './invoice-pending-reatiler/invo
     InvoiceAllComponent,
     InvoicePaidComponent,
     InvoiceComponent,
-    InvoicePendingReatilerComponent
+    InvoicePendingReatilerComponent,
+    InvoiceFormComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers:[InvoiceService]
 })

@@ -1,0 +1,21 @@
+<div [formGroup]="formGroup">
+
+    <p><input type="text" placeholder="Enter Reatiler Name" formControlName = "retailer"></p>
+    
+    <p><input type="number" placeholder="Enter Amount" formControlName = "amount"></p>
+    <p><input type="text" placeholder="Enter Date" formControlName = "dueDate"></p>
+    <p><input type="checkbox" placeholder="Paid?" formControlName="paid"></p>
+</div>
+
+
+
+<button
+(click)="onCancel()"
+>Cancel
+</button>
+<button 
+(click)="onSave()"
+>Save</button> <br>
+
+
+

@@ -9,6 +9,7 @@ import { InvoiceService } from '../invoice.service';
   styleUrls: ['./invoice-summary.component.css']
 })
 export class InvoiceSummaryComponent implements OnInit {
+  formDisplayed: boolean=false;
 
   constructor(private invoiceService: InvoiceService) { }
 
@@ -18,6 +19,10 @@ export class InvoiceSummaryComponent implements OnInit {
       this.invoiceService.fetchSummary().subscribe(details => {
         this.details=details;
       })
+    }
+
+    onFormClosed(data: boolean){
+      this.formDisplayed=data
     }
 
   }

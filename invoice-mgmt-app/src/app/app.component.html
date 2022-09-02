@@ -1,13 +1,13 @@
 <head>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 </head>
-<body class="app-container">
+<body class="app-container" style="background-color:#e0e0e0;">
   <div *ngIf="errorService.errorMessage" class="error">{{errorService.errorMessage}}</div>
   <div >
     <h1 class="heading">Welcome to Invoice management app</h1>
-    <!--<div class="'nav-menu">
-      <a routerLink="invoice">invoice Summary</a> 
-   </div>-->
+    <div class="'nav-menu">
+      <a routerLink="invoice">invoice Summary</a> | <a routerLink="payment">Payment Summary</a>
+   </div>
   </div>
  <router-outlet></router-outlet>
 </body>

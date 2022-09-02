@@ -6,6 +6,7 @@ import { InvoicePendingReatilerComponent } from './invoice-management/invoice-pe
 import { InvoicePendingComponent } from './invoice-management/invoice-pending/invoice-pending.component';
 import { InvoiceSummaryComponent } from './invoice-management/invoice-summary/invoice-summary.component';
 import { InvoiceComponent } from './invoice-management/invoice/invoice.component';
+import { AllPaymentsComponent } from './payment-management/all-payments/all-payments.component';
 
 const routes: Routes = [
   {path : "invoice", component : InvoiceSummaryComponent, children : [
@@ -15,7 +16,8 @@ const routes: Routes = [
     {path: ":retailer", component : InvoicePendingReatilerComponent, children : [
       {path: ":invoiceId", component : InvoiceComponent}
     ]},
-  ]}
+  ]},
+  {path:"payment", component: AllPaymentsComponent}
 ];
 
 @NgModule({

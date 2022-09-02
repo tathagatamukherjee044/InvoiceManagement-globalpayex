@@ -69,3 +69,12 @@ export async function postNewInvoice(data) {
     invoice.save();
     return invoice
 }
+
+export async function getAmountById(invoiceId) {
+    console.log("called from services");
+    let invoice =await Invoice
+    .findById(invoiceId)
+    //.populate('publicationHouseId')
+    .exec();
+    return invoice?.amount;
+}

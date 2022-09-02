@@ -5,6 +5,7 @@ import logit from './middlewares/logit.js';
 import invoicesRouter from './routes/invoices.js';
 import cors from 'cors';
 import { handleError } from './middlewares/handle_error.js';
+import paymentsRouter from './routes/payments.js';
 
 
 const app = express(); // application of express
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(cors());
 app.use(logit);
 app.use(invoicesRouter);
+app.use(paymentsRouter)
 app.use(handleError);
 
 app.get('/greeter', (req,res) => {

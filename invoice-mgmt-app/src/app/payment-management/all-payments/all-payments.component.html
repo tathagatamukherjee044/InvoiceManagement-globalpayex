@@ -1,0 +1,31 @@
+<div class="payments-container">
+    <table *ngIf="payments.length">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Retailer</td>
+                <td>Clear Date</td>
+                <td>Amount</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let payment of payments">
+                <td>
+                    {{payment._id}}
+                </td>
+                <td>
+                    {{payment.retailer}}
+                </td>
+                <td>
+                    {{payment.clearDate | date}}
+                </td>
+                <td>
+                    {{payment.amount}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+

@@ -5,6 +5,7 @@ import { InvoiceManagementModule } from './invoice-management/invoice-management
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorService } from './error.service';
+import { PaymentManagementModule } from './payment-management/payment-management.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ErrorService } from './error.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    InvoiceManagementModule
+    InvoiceManagementModule,
+    PaymentManagementModule
   ],
   providers: [ErrorService],
   bootstrap: [AppComponent]

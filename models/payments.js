@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import invoiceSchema from './invoice.js'
+import Invoice from "./invoice.js";
 
 const {Schema,model, ObjectId} = mongoose;
 
@@ -9,7 +10,12 @@ const paymentSchema = new Schema({
         type : Number,
         default: 0
     },
-    invoices : [invoiceSchema]
+    invoices : {
+        type : [Schema.Types.ObjectId],
+        ref : Invoice
+
+},
+    clearDate : Date
 })
 
-const Payment = model('Payment', paymentSchema);
+export const Payment = model('Payment', paymentSchema);

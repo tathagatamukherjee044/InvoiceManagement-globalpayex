@@ -9,10 +9,12 @@ export type Payment = {
         type : Number,
         default: 0
     },
-    invoices : {
-        type : [Schema.Types.ObjectId],
-        ref : Invoice
+    invoices : [Invoice]
+//     {
+//         type : [Schema.Types.ObjectId],
+//         ref : Invoice
 
-},
+// }
+,
     clearDate : Date
 }

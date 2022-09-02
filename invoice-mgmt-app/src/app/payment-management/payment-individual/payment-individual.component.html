@@ -1,0 +1,30 @@
+<div class="payments-container">
+    <h2>retailer: {{payment?.retailer}}</h2>
+    <h3>payment id : {{payment?._id}}</h3>
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Retailer</td>
+                <td>Due Date</td>
+                <td>Amount</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let invoice of payment?.invoices">
+                <td>
+                    {{invoice._id}}
+                </td>
+                <td>
+                    {{invoice.retailer}}
+                </td>
+                <td>
+                    {{invoice.dueDate}}
+                </td>
+                <td>
+                    {{invoice.amount}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

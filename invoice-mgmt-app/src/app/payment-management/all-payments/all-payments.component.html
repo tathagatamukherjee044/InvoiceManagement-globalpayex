@@ -6,6 +6,7 @@
                 <td>Retailer</td>
                 <td>Clear Date</td>
                 <td>Amount</td>
+                <td>More Details</td>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,9 @@
                 </td>
                 <td>
                     {{payment.amount}}
+                </td>
+                <td>
+                    <a routerLink="/payment/{{payment._id}}">View Invoice</a>
                 </td>
             </tr>
         </tbody>

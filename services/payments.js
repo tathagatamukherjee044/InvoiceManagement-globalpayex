@@ -58,3 +58,12 @@ export async function getPayments() {
     .exec();
     return payments;
 }
+
+export async function getPaymentById(paymentId) {
+    console.log("called from services");
+    let payment =await Payment
+    .findById(paymentId)
+    .populate('invoices')
+    .exec();
+    return payment;
+}

@@ -1,9 +1,10 @@
 import Invoice from "../models/invoice.js";
 import { Payment } from "../models/payments.js";
-import { getAmountById } from "./invoice.js";
+import { addPaymentToInvoice, getAmountById } from "./invoice.js";
 
 export async function createNewPayment(data) {
     const invoices = data.invoices;
+    let payment;
 
     function sum(...theArgs) {
         let total = 0;
@@ -30,26 +31,23 @@ export async function createNewPayment(data) {
         console.log(money)
         return new Promise((resolve) => resolve(money))
     }));
-    let total = sum(...amount)
-    data.amount=total;
-    console.log(total)
+        let total = sum(...amount)
+        data.amount=total;
+        console.log(total)
 
-    data.clearDate = new Date();
+        data.clearDate = new Date();
 
-    let  payment = new Payment(data);
-   payment.save();
-}
+        payment = new Payment(data);
+        payment.save();
+    }   
 
-func();
-    //return payment;})
+    await func();
+    console.log(payment._id.toString())
 
-    // console.log(amount);
-    // data.amount=amount ;
-    // data.clearDate = new Date();
-
-    // let  payment = new Payment(data);
-    // payment=await payment.save();
-    // return payment;
+    invoices.map(async (invoice) => {
+        addPaymentToInvoice(invoice.toString(),payment._id.toString());
+    })
+    
 }
 
 export async function getPayments() {
@@ -66,4 +64,32 @@ export async function getPaymentById(paymentId) {
     .populate('invoices')
     .exec();
     return payment;
+}
+
+export async function makeSinglePayment(invoiceId,amountPaid) {
+    const money= await getAmountById(invoiceId.toString());
+    let update;
+    if (amountPaid === money) {
+       update = {paid:true,balance:0};
+    }
+    else {
+        update = {
+            balance:money-amountPaid
+        }
+    }
+
+    const invoice = await Invoice.findByIdAndUpdate(invoiceId,update,{
+        returnDocument:'after'
+    }).exec();
+    const data = {
+        retailer : invoice.retailer,
+        amount : amountPaid,
+        invoices: [invoiceId.toString()],
+        clearDate : new Date()
+    }
+
+    const payment = new Payment(data);
+    payment.save();
+
+    addPaymentToInvoice(invoiceId.toString(),payment._id.toString());
 }

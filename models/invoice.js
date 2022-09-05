@@ -6,7 +6,9 @@ const invoiceSchema = new Schema({
     retailer : String,
     amount : Number,
     dueDate : Date,
-    paid : Boolean
+    paid : Boolean,
+    payments : [String],
+    balance: Number
 })
 
 const Invoice = model('Invoice', invoiceSchema);

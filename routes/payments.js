@@ -6,7 +6,7 @@ import { getAmountById } from "../services/invoice.js";
 
 const paymentsRouter = express.Router()
 
-paymentsRouter.post("/payments", handlePostPayment)
+paymentsRouter.post("/payments", handlePostPayment) // handles multiple full paid invoices in one payment
 
 paymentsRouter.get("/payments", handleGetAllPayments)
 

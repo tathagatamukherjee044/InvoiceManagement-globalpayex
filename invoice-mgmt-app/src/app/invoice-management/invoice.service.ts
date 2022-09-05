@@ -58,5 +58,11 @@ export class InvoiceService {
       }
     }).pipe(catchError((err) => this.handleError(err)));
   }
+
+  makePayment(amount:number,invoiceId:String|undefined) : Observable<any> {
+    return this.http.post<any>(`${url}/pay/${invoiceId}`, {
+      amount:amount
+    })
   }
+}
 

@@ -9,6 +9,9 @@
                 <td>Retailer</td>
                 <td>Due Date</td>
                 <td>Amount</td>
+                <td>
+                    Balance
+                </td>
                 <td>More Details</td>
             </tr>
         </thead>
@@ -25,6 +28,9 @@
                 </td>
                 <td>
                     {{invoice.amount}}
+                </td>
+                <td>
+                    {{invoice.balance}}
                 </td>
                 <td>
                     <a routerLink="/invoice/{{invoice.retailer}}/{{invoice._id}}">View Invoice</a>

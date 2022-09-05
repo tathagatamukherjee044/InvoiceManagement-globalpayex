@@ -4,4 +4,12 @@
     <h3>{{invoice?._id}}</h3>
     <p>Amount : {{invoice?.amount}}</p>
     <p>Due Date : {{invoice?.dueDate | date}}</p>
+
+    <div *ngIf="!formDisplayed, else payForm"><button (click)="onFormClosed(true)">Make Payment</button></div>
+
+    <ng-template #payForm>
+        <app-pay-invoice (formClosed)="onFormClosed($event)"
+        [invoiceId]="invoice?._id"
+        ></app-pay-invoice>
+    </ng-template>
 </div>

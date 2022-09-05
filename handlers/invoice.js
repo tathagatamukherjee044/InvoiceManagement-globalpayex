@@ -1,4 +1,5 @@
 import { getAllInvoices, getInvoiceById, getInvoiceSummary, getUnpaidInvoices, getPaidInvoices, getInvoicesByRetailer, postNewInvoice } from "../services/invoice.js";
+import { makeSinglePayment } from "../services/payments.js";
 
 export async function handleGetBookById (req,res) {
     // console.log(req.url);
@@ -45,4 +46,12 @@ export async function handlePostNewInvoice(req,res) {
         } catch (err) {
             next(err)
         }
+}
+
+export async function handlePayInvoice(req,res) {
+    const invoiceId = req.params.invoiceId;
+    const data = req.body;
+    const amount = data.amount;
+    await makeSinglePayment(invoiceId,amount);
+    res.sendStatus(200);
 }

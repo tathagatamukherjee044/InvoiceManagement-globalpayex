@@ -11,6 +11,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoicePendingReatilerComponent } from './invoice-pending-reatiler/invoice-pending-reatiler.component';
 import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PayInvoiceComponent } from './pay-invoice/pay-invoice.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InvoicePaidComponent,
     InvoiceComponent,
     InvoicePendingReatilerComponent,
-    InvoiceFormComponent
+    InvoiceFormComponent,
+    PayInvoiceComponent
   ],
   imports: [
     CommonModule,

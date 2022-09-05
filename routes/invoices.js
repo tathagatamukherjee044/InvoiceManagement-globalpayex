@@ -1,6 +1,6 @@
 import express from "express";
 import Invoice from "../models/invoice.js";
-import { handleGetAllInvoices, handleGetBookById, handleGetInvoiceSummary, handleGetUnpaidInvoices, handleGetPaidInvoices, handleGetInvoicesByRetailer, handlePostNewInvoice } from "../handlers/invoice.js";
+import { handleGetAllInvoices, handleGetBookById, handleGetInvoiceSummary, handleGetUnpaidInvoices, handleGetPaidInvoices, handleGetInvoicesByRetailer, handlePostNewInvoice, handlePayInvoice } from "../handlers/invoice.js";
 
 const invoicesRouter = express.Router();
 
@@ -17,5 +17,7 @@ invoicesRouter.get("/invoices", handleGetAllInvoices)
 invoicesRouter.get("/invoices/unpaid/:retailer", handleGetInvoicesByRetailer)
 
 invoicesRouter.post("/invoices", handlePostNewInvoice)
+
+invoicesRouter.post("/invoices/pay/:invoiceId", handlePayInvoice)
 
 export default invoicesRouter;

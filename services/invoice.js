@@ -78,3 +78,17 @@ export async function getAmountById(invoiceId) {
     .exec();
     return invoice?.amount;
 }
+
+export async function addPaymentToInvoice(invoiceId,paymentId) {
+    console.log("called from services");
+    let invoice =await Invoice
+    .findById(invoiceId)
+    //.populate('publicationHouseId')
+    .exec();
+    invoice.payments.push(paymentId);
+    invoice.save();
+}
+
+export async function makePayment(invoiceId,amount) {
+
+}

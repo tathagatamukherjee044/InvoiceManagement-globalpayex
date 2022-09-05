@@ -15,6 +15,8 @@ export class InvoiceComponent implements OnInit {
 
   invoice : Invoice | null = null;
 
+  formDisplayed: boolean=false;
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const {retailer, invoiceId} = params;
@@ -26,5 +28,9 @@ export class InvoiceComponent implements OnInit {
       })
   } )
 
+}
+
+onFormClosed(data: boolean){
+  this.formDisplayed=data
 }
 }

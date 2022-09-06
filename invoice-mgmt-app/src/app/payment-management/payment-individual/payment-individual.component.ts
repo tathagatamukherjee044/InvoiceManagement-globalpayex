@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Invoice } from '../types/invoice';
 import { Schema } from 'mongoose';
 import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-payment-individual',
@@ -15,7 +16,14 @@ export class PaymentIndividualComponent implements OnInit {
 
   payment : Payment | null = null;
   invoices : Invoice[] = [] 
-  constructor(public paymentService : PaymentService,private route : ActivatedRoute) { }
+  formGroup : FormGroup
+
+  constructor(public paymentService : PaymentService,private route : ActivatedRoute, private fb : FormBuilder) {
+    this.formGroup= fb.group({
+      retailer: [''],
+      invoices : fb.array([])
+    });
+   }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -26,14 +34,17 @@ export class PaymentIndividualComponent implements OnInit {
 
       console.log(this.payment)
 
-      this.payment.invoices.forEach(invoice => {
-        this.paymentService.fetchInvoice(invoice._id).subscribe((invoice) => {
-          this.invoices.push(invoice)
-        });
-      });
-      
+      // this.payment.invoices.forEach(invoice => {
+      //   this.paymentService.fetchInvoice(invoice._id).subscribe((invoice) => {
+      //     this.invoices.push(invoice)
+      //   });
+      // }
+      // )
+      ;
     })
   })
 
 }
+
+
 }

@@ -70,13 +70,13 @@ export async function postNewInvoice(data) {
     return invoice
 }
 
-export async function getAmountById(invoiceId) {
+export async function getBalanceById(invoiceId) {
     console.log("called from services");
     let invoice =await Invoice
     .findById(invoiceId)
     //.populate('publicationHouseId')
     .exec();
-    return invoice?.amount;
+    return invoice?.balance;
 }
 
 export async function addPaymentToInvoice(invoiceId,paymentId) {

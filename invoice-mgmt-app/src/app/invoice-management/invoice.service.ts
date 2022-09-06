@@ -64,5 +64,9 @@ export class InvoiceService {
       amount:amount
     })
   }
+
+  makeMultiplePayments(data:JSON) : Observable<any> {
+    return this.http.post<any>(`http://localhost:8081/payments`, data)
+  }
 }
 

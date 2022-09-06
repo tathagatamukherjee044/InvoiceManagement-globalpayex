@@ -1,0 +1,24 @@
+<p>pay multiple works</p>
+<div [formGroup]="formGroup">
+    <p><input type="text" placeholder="copy paste retailer here" formControlName = "retailer"></p>
+    <div formArrayName="invoices">
+        <button (click)="onAddInvoice()">Add Invoice</button>
+      
+      <div *ngFor="let author of invoices.controls; let i = index">
+        <div [formGroupName]="i">
+        <input type="text" placeholder="copy paste id here" formControlName="id" >
+        <button >Remove</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<button
+>Cancel
+</button>
+<button 
+(click)="onSave()"
+>Save</button>
+
+
+

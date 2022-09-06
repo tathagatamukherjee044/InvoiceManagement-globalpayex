@@ -79,6 +79,39 @@ async function createNewInvoice(data) {
     return invoice;
 }
 
+function randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+  
+  const rndInt = randomIntFromInterval(1, 6)
+  console.log(rndInt)
+
+async function createAutoInvoices() {
+    const retailers = ['Alpha Stores','Bravo Stores','Charlie Stores','Delta Stores','Echo Stores','Foxtrot Stores',
+    'Golf Stores','Hotel Stores','India Stores','Juliet Stores','Kilo Stores','Lima Stores','Mike Stores',
+    'November Stores','Oscar Stores','Papa Stores','Quebec Stores','Romeo Stores','Sierra Stores','Tango Stores',
+    'Uniform Stores','Victor Stores','Whiskey Stores','X-Ray Stores','Yankee Stores','Zulu Stores'];
+
+    for (let i=0;i<50;i++) {
+        const rndRetailer = randomIntFromInterval(0, 25);
+        const rndAmount = randomIntFromInterval(3, 15)
+        const data = {
+            retailer : retailers[rndRetailer],
+            amount : rndAmount*1000,
+            balance : rndAmount*1000,
+            dueDate : new Date("12-12-2022"),
+            paid : false
+        }
+
+        let invoice = new Invoice(data);
+        invoice=await invoice.save();
+        console.log(`new invoice created ${retailers[rndRetailer]} number ${i}`);
+    }
+
+}
+
+//createAutoInvoices();
+
 // createNewInvoice(invoice);
 // createNewInvoice(invoice2);
 // createNewInvoice(invoice3);

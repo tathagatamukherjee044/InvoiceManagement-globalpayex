@@ -1,5 +1,6 @@
 <div class="invoices-container">
     <h1>Pending Invoices of {{invoices[0].retailer}}</h1>
+    <a routerLink="/invoice/{{invoices[0].retailer}}/payMultiple">Pay Multiple</a>
     <div class="row">
         <div class="row1">
     <table *ngIf="invoices.length">

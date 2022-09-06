@@ -6,6 +6,7 @@ import { InvoicePendingReatilerComponent } from './invoice-management/invoice-pe
 import { InvoicePendingComponent } from './invoice-management/invoice-pending/invoice-pending.component';
 import { InvoiceSummaryComponent } from './invoice-management/invoice-summary/invoice-summary.component';
 import { InvoiceComponent } from './invoice-management/invoice/invoice.component';
+import { PayMultipleComponent } from './invoice-management/pay-multiple/pay-multiple.component';
 import { AllPaymentsComponent } from './payment-management/all-payments/all-payments.component';
 import { PaymentIndividualComponent } from './payment-management/payment-individual/payment-individual.component';
 import { PaymentSummaryComponent } from './payment-management/payment-summary/payment-summary.component';
@@ -16,7 +17,9 @@ const routes: Routes = [
     {path: "all", component : InvoiceAllComponent},
     {path: "paid", component : InvoicePaidComponent},
     {path: ":retailer", component : InvoicePendingReatilerComponent, children : [
+      {path : "payMultiple", component : PayMultipleComponent},
       {path: ":invoiceId", component : InvoiceComponent}
+      
     ]},
   ]},
   {path:"payment", component: PaymentSummaryComponent, children: [

@@ -1,9 +1,11 @@
 import Invoice from "../models/invoice.js";
 import { Payment } from "../models/payments.js";
-import { addPaymentToInvoice, getAmountById } from "./invoice.js";
+import { addPaymentToInvoice, getBalanceById } from "./invoice.js";
 
 export async function createNewPayment(data) {
-    const invoices = data.invoices;
+    let invoices = data.invoices;
+    data.invoices=[];
+    
     let payment;
 
     function sum(...theArgs) {
@@ -17,13 +19,15 @@ export async function createNewPayment(data) {
     async function func() {
         let amount =[];
         amount = await Promise.all(invoices.map(async (invoice) => {
+        invoice = invoice.id.toString()
+        data.invoices.push(invoice);
         console.log(invoice.toString());
-        const money= await getAmountById(invoice.toString());
+        const money= await getBalanceById(invoice.toString());
         
 
         console.log("amount is " + money)
 
-        let update = {paid:true};
+        let update = {paid:true,balance:0};
 
         Invoice.findByIdAndUpdate(invoice,update,{
             returnDocument:'after'
@@ -36,6 +40,15 @@ export async function createNewPayment(data) {
         console.log(total)
 
         data.clearDate = new Date();
+        
+        // invoices=invoices.map(invoice => {
+        //     invoice=invoice.id
+        //     console.log(invoice);
+        // });
+        // console.log(invoices)
+        //data.invoices=invoices
+
+        console.log(data);
 
         payment = new Payment(data);
         payment.save();
@@ -44,7 +57,7 @@ export async function createNewPayment(data) {
     await func();
     console.log(payment._id.toString())
 
-    invoices.map(async (invoice) => {
+    data.invoices.map(async (invoice) => {
         addPaymentToInvoice(invoice.toString(),payment._id.toString());
     })
     
@@ -67,7 +80,7 @@ export async function getPaymentById(paymentId) {
 }
 
 export async function makeSinglePayment(invoiceId,amountPaid) {
-    const money= await getAmountById(invoiceId.toString());
+    const money= await getBalanceById(invoiceId.toString());
     let update;
     if (amountPaid === money) {
        update = {paid:true,balance:0};

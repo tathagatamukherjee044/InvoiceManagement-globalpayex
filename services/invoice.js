@@ -1,3 +1,4 @@
+import e from "express";
 import Invoice from "../models/invoice.js";
 
 export async function getInvoiceById(invoiceId) {
@@ -10,10 +11,19 @@ export async function getInvoiceById(invoiceId) {
 }
 
 export async function getInvoiceSummary() {
-    const resultsTotal= await Invoice.aggregate([{$group : { _id : null, totalOwed: {$sum : "$amount"}}}]).exec();
-    const resultsPending= await Invoice.aggregate([{$match : {paid : false}},{$group : { _id : null, totalOwed: {$sum : "$amount"}}}]).exec();
-    const resultsPaid= await Invoice.aggregate([{$match : {paid : true}},{$group : { _id : null, totalOwed: {$sum : "$amount"}}}]).exec();
+    const resultsTotal= await Invoice.aggregate([{$group : { _id : null, totalOwed: {$sum : "$amount"},myCount: { $sum: 1 }}}]).exec();
+    const resultsPending= await Invoice.aggregate([{$match : {paid : false}},{$group : { _id : null, totalOwed: {$sum : "$amount"},myCount: { $sum: 1 }}}]).exec();
+    const resultsPaid= await Invoice.aggregate([{$match : {paid : true}},{$group : { _id : null, totalOwed: {$sum : "$amount"},myCount: { $sum: 1 }}}]).exec();
     
+    let  totalPaid;
+    let totalPaidCount
+    if(resultsPaid[0]) {
+        totalPaid =  resultsPaid[0].totalOwed;
+        totalPaidCount= resultsPaid[0].myCount;
+    }else {
+        totalPaid =  0
+        totalPaidCount= 0
+    }
     // const results = {
     //     resultsTotal : resultsTotal.totalOwed,
     //     //resultsPending : resultsPending.$group.totalOwed
@@ -22,7 +32,10 @@ export async function getInvoiceSummary() {
     const response = {
         totalSales: resultsTotal[0].totalOwed,
         totalPending: resultsPending[0].totalOwed,
-        totalPaid: resultsPaid[0].totalOwed,
+        totalPaid,
+        totalSalesCount: resultsTotal[0].myCount,
+        totalPendingCount: resultsPending[0].myCount,
+        totalPaidCount,
     }
     // res.send can not send number values // res.send(ress.totalOwed) throws an error
     return response;
@@ -39,7 +52,7 @@ export async function getAllInvoices() {
 export async function getUnpaidInvoices() {
     console.log('called from services');
     let invoices=await Invoice
-    .aggregate([{$match : {paid: false}},{$group : { _id : "$retailer", amount: {$sum : "$amount"}}}])
+    .aggregate([{$match : {paid: false}},{$group : { _id : "$retailer", amount: {$sum : "$amount"}}},{$sort : {_id:1}}])
     .exec();
 
     return invoices;
@@ -57,7 +70,7 @@ export async function getPaidInvoices() {
 export async function getInvoicesByRetailer(retail) {
     console.log('called from services');
     let invoices=await Invoice
-    .aggregate([{$match : {retailer : retail}},])
+    .aggregate([{$match : {retailer : retail,paid:false}},])
     .exec();
     
     return invoices;

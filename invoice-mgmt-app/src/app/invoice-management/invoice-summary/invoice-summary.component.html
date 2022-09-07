@@ -6,8 +6,8 @@
     </ng-template>
 
 
-    Total Sales made is : {{details?.totalSales}} <a routerLink="/invoice/all">Get Details</a> <br> 
-    Total Paid is : {{details?.totalPaid}} <a routerLink="/invoice/paid">Get Details</a><br>
-    Total Pending is : {{details?.totalPending}} <a routerLink="/invoice/unpaid">Get Details</a>
+    <div>Total Sales made is : {{details?.totalSales}}......with number : {{details?.totalSalesCount}}</div><a routerLink="/invoice/all">Get Details</a> <br> 
+    Total Paid is : {{details?.totalPaid}}......with number : {{details?.totalPaidCount}}<a routerLink="/invoice/paid">Get Details</a><br>
+    Total Pending is : {{details?.totalPending}}......with number : {{details?.totalPendingCount}}<a routerLink="/invoice/unpaid">Get Details</a>
 </div>
 <router-outlet></router-outlet>

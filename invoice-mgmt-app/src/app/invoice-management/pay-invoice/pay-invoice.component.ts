@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, Validators,FormBuilder } from '@angular/forms';
+import { FormGroup, Validators,FormBuilder, FormControl, AbstractControl } from '@angular/forms';
 import { InvoiceService } from '../invoice.service';
 
 @Component({
@@ -14,16 +14,22 @@ export class PayInvoiceComponent implements OnInit {
   @Input()
   invoiceId : String|undefined= '';
 
+  @Input()
+  defalultAmount : number|undefined ;
+
   @Output()
   formClosed = new EventEmitter<boolean>();
 
   constructor(public fb : FormBuilder, private invoiceService: InvoiceService) {
     this.formGroup= fb.group({
-    amount: [0,[Validators.required, Validators.min(1)]],
-  }); }
+    amount : [{value:this.defalultAmount}]
+  }); 
+  
+  }
 
   ngOnInit(): void {
-    
+    this.formGroup.get('amount')?.setValue(this.defalultAmount);
+    console.log(`This is the default amount ${this.defalultAmount}`);
   }
 
   onCancel() {
@@ -34,6 +40,16 @@ export class PayInvoiceComponent implements OnInit {
     console.log(bill);
     this.invoiceService.makePayment(bill.amount,this.invoiceId).subscribe();
   }
+
+  get amountAbs() {
+    return this.formGroup.get('amount');
+  }
+
+  set amountAbs(passedAmount) {
+    this.formGroup.get('amount')?.setValue(passedAmount);
+  }
+
+  
 
 
 }

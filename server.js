@@ -92,7 +92,7 @@ async function createAutoInvoices() {
     'November Stores','Oscar Stores','Papa Stores','Quebec Stores','Romeo Stores','Sierra Stores','Tango Stores',
     'Uniform Stores','Victor Stores','Whiskey Stores','X-Ray Stores','Yankee Stores','Zulu Stores'];
 
-    for (let i=0;i<50;i++) {
+    for (let i=0;i<49900;i++) {
         const rndRetailer = randomIntFromInterval(0, 25);
         const rndAmount = randomIntFromInterval(3, 15)
         const data = {

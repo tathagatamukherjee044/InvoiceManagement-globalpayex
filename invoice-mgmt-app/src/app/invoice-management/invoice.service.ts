@@ -30,8 +30,8 @@ export class InvoiceService {
     return this.http.get<Invoice[]>(`${url}/unpaid`).pipe(catchError((err) => this.handleError(err)))
   }
 
-  fetchAll() : Observable<Invoice[]>{
-    return this.http.get<Invoice[]>(`${url}`).pipe(catchError((err) => this.handleError(err)));
+  fetchAll(page:number,limit:number) : Observable<Invoice[]>{
+    return this.http.get<Invoice[]>(`${url}/?page=${page}&limit=${limit}`).pipe(catchError((err) => this.handleError(err)));
   }
 
   fetchPaid() : Observable<Invoice[]> {
@@ -68,5 +68,9 @@ export class InvoiceService {
   makeMultiplePayments(data:JSON) : Observable<any> {
     return this.http.post<any>(`http://localhost:8081/payments`, data)
   }
-}
+
+  getDistinctRetailers() : Observable<any> {
+    return this.http.get<any>(`${url}/distinct`)
+  }
+ }
 

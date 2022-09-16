@@ -1,10 +1,45 @@
 <div class="invoices-container">
+    <div>
+        <input type="checkbox"  [(ngModel)]="testCheck">
+        {{testCheck}}
+
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Enter Document Number">
+        <button (click)="onSearch()">Search</button><br>
+
+        <button (click)="onDate()">Due Today</button><br>
+
+        From Date<input type="date" [(ngModel)]="fromDate"> <br>
+
+        To Date<input type="date" [(ngModel)]="toDate"> <br>
+
+        <button (click)="onChangeFilter()">Check Dates</button><br>
+
+        <div *ngFor="let retailer of retailers; let i = index">
+            {{retailer}}<input type="checkbox" (change)="retailerCheckBox(retailer)" [(ngModel)]="checkBoxFilter[i]">
+        </div>
+
+        <div *ngFor="let retailer of retailersFilter">
+            {{retailer}}
+        </div>
+
+        <div *ngFor="let retailer of checkBoxFilter">
+            {{retailer}}
+        </div>
+
+        <button (click)="onUnFilter()">UnFilter</button>
+
+    </div>
+    <button (click)="previousPage()" [disabled]="page<2"> << Previous </button>
+    <button (click)="nextPage()" [disabled]="page*limit >= numberOfInvoices"> Next >> </button>
+    <input type="number" [ngModel]="limit" (ngModelChange)="onChange($event)" size="1">
+    <p>displaying {{page*limit}} of {{numberOfInvoices}} </p>
     <table *ngIf="invoices.length; else loader">
         <thead>
             <tr>
                 <td>ID</td>
                 <td>Retailer</td>
                 <td>Due Date</td>
+                <td>Issue Date</td>
                 <td>Amount</td>
                 <td>Balance</td>
             </tr>
@@ -18,7 +53,10 @@
                     {{invoice.retailer}}
                 </td>
                 <td>
-                    {{invoice.dueDate}}
+                    {{invoice.dueDate | date}}
+                </td>
+                <td>
+                    {{invoice.issueDate | date}}
                 </td>
                 <td>
                     {{invoice.amount}}

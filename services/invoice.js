@@ -41,10 +41,16 @@ export async function getInvoiceSummary() {
     return response;
 }
 
-export async function getAllInvoices() {
+export async function getAllInvoices(page,limit) {
     console.log('called from services');
+    if (page===undefined || limit === undefined) {
+        page = 1 ;
+        limit = 10;
+    }
     let invoices=await Invoice
     .find()
+    .limit(limit)
+    .skip((page-1)*limit)
     .exec();
     return invoices;
 }
@@ -103,5 +109,10 @@ export async function addPaymentToInvoice(invoiceId,paymentId) {
 }
 
 export async function makePayment(invoiceId,amount) {
+    
+}
 
+export async function getDistinct() {
+    let retailers = await Invoice.find().distinct('retailer').exec();
+    return retailers;
 }

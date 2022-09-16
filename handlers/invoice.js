@@ -1,4 +1,4 @@
-import { getAllInvoices, getInvoiceById, getInvoiceSummary, getUnpaidInvoices, getPaidInvoices, getInvoicesByRetailer, postNewInvoice } from "../services/invoice.js";
+import { getAllInvoices, getInvoiceById, getInvoiceSummary, getUnpaidInvoices, getPaidInvoices, getInvoicesByRetailer, postNewInvoice, getDistinct } from "../services/invoice.js";
 import { makeSinglePayment } from "../services/payments.js";
 
 export async function handleGetBookById (req,res) {
@@ -16,7 +16,9 @@ export async function handleGetInvoiceSummary(req,res) {
 }
 
 export async function handleGetAllInvoices(req,res) {
-    const invoices = await getAllInvoices();
+    const {page,limit} = req.query;
+    console.log(`the qury is ${page} and  ${limit}`)
+    const invoices = await getAllInvoices(page,limit);
     res.send(invoices);
 }
 
@@ -54,4 +56,9 @@ export async function handlePayInvoice(req,res) {
     const amount = data.amount;
     await makeSinglePayment(invoiceId,amount);
     res.sendStatus(200);
+}
+
+export async function handleGetDistinct(req,res) {
+    const retailers = await getDistinct();
+    res.send(retailers);
 }

@@ -13,6 +13,8 @@ import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PayInvoiceComponent } from './pay-invoice/pay-invoice.component';
 import { PayMultipleComponent } from './pay-multiple/pay-multiple.component';
+import { InvoiceSearchPipe } from './invoice-search.pipe';
+
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { PayMultipleComponent } from './pay-multiple/pay-multiple.component';
     InvoicePendingReatilerComponent,
     InvoiceFormComponent,
     PayInvoiceComponent,
-    PayMultipleComponent
+    PayMultipleComponent,
+    InvoiceSearchPipe
   ],
   imports: [
     CommonModule,

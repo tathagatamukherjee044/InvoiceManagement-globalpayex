@@ -4,5 +4,6 @@ export type Invoice = {
     amount: number,
     balance: number,
     dueDate: Date,
+    issueDate:Date,
     paid : boolean
 }

@@ -16,6 +16,10 @@ tr,td {
     border-radius: 5px;
 }
 
+button{
+  margin: 10px;
+}
+
 .container {
 
     position: absolute;

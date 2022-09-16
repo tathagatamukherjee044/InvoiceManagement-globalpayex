@@ -45,6 +45,8 @@ async function initServer() {
 
 initServer();
 
+
+
 var conn = mongoose.connection;
 conn.on('connected', function() {
     console.log('database is connected successfully');
@@ -87,19 +89,23 @@ function randomIntFromInterval(min, max) { // min and max included
   console.log(rndInt)
 
 async function createAutoInvoices() {
-    const retailers = ['Alpha Stores','Bravo Stores','Charlie Stores','Delta Stores','Echo Stores','Foxtrot Stores',
-    'Golf Stores','Hotel Stores','India Stores','Juliet Stores','Kilo Stores','Lima Stores','Mike Stores',
-    'November Stores','Oscar Stores','Papa Stores','Quebec Stores','Romeo Stores','Sierra Stores','Tango Stores',
-    'Uniform Stores','Victor Stores','Whiskey Stores','X-Ray Stores','Yankee Stores','Zulu Stores'];
+    const retailers = ['Alpha Stores','Bravo Stores','Charlie Stores','Delta Stores'
+    // ,'Echo Stores','Foxtrot Stores',
+    // 'Golf Stores','Hotel Stores','India Stores','Juliet Stores','Kilo Stores','Lima Stores','Mike Stores',
+    // 'November Stores','Oscar Stores','Papa Stores','Quebec Stores','Romeo Stores','Sierra Stores','Tango Stores',
+    // 'Uniform Stores','Victor Stores','Whiskey Stores','X-Ray Stores','Yankee Stores','Zulu Stores'
+    ];
 
-    for (let i=0;i<49900;i++) {
-        const rndRetailer = randomIntFromInterval(0, 25);
+    for (let i=0;i<95;i++) {
+        const rndRetailer = randomIntFromInterval(0, 3);
         const rndAmount = randomIntFromInterval(3, 15)
+        const rndDate = randomIntFromInterval(1,30);
         const data = {
             retailer : retailers[rndRetailer],
             amount : rndAmount*1000,
             balance : rndAmount*1000,
             dueDate : new Date("12-12-2022"),
+            issueDate : new Date(2022,8,rndDate),
             paid : false
         }
 
@@ -111,6 +117,36 @@ async function createAutoInvoices() {
 }
 
 //createAutoInvoices();
+
+async function createAutoInvoicesCustom() {
+    const retailers = ['Alpha Stores','Bravo Stores','Charlie Stores','Delta Stores'
+    // ,'Echo Stores','Foxtrot Stores',
+    // 'Golf Stores','Hotel Stores','India Stores','Juliet Stores','Kilo Stores','Lima Stores','Mike Stores',
+    // 'November Stores','Oscar Stores','Papa Stores','Quebec Stores','Romeo Stores','Sierra Stores','Tango Stores',
+    // 'Uniform Stores','Victor Stores','Whiskey Stores','X-Ray Stores','Yankee Stores','Zulu Stores'
+];
+
+    for (let i=0;i<5;i++) {
+        const rndRetailer = randomIntFromInterval(0, 3);
+        const rndAmount = randomIntFromInterval(3, 15)
+        const rndDate = randomIntFromInterval(1,30);
+        const data = {
+            retailer : retailers[rndRetailer],
+            amount : rndAmount*1000,
+            balance : rndAmount*1000,
+            dueDate : new Date("09-15-2022"),
+            issueDate : new Date(2022,8,rndDate),
+            paid : false
+        }
+
+        let invoice = new Invoice(data);
+        invoice=await invoice.save();
+        console.log(`new invoice created ${retailers[rndRetailer]} number ${i}`);
+    }
+
+}
+
+//createAutoInvoicesCustom();
 
 // createNewInvoice(invoice);
 // createNewInvoice(invoice2);

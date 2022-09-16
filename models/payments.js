@@ -14,7 +14,7 @@ const paymentSchema = new Schema({
         type : [Schema.Types.ObjectId],
         ref : Invoice
 
-},
+    },
     clearDate : Date
 })
 

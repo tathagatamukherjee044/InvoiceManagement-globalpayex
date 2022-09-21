@@ -136,7 +136,7 @@ export class InvoiceAllComponent implements OnInit {
     if(this.fromDate) {
       this.invoices=this.invoices.filter(invoice => {
         if(this.fromDate)
-        return  invoice.issueDate > this.fromDate
+        return  invoice.issueDate >= this.fromDate
         else return
       })
     }
